@@ -11,19 +11,19 @@ export class UsersService {
     private repository: Repository<UserEntity>,
   ) {}
 
-  async findByEmail(email: string) {
+  async findUserByEmail(email: string) {
     return this.repository.findOneBy({
       email,
     });
   }
 
-  async findById(id: number) {
+  async findUserById(id: number) {
     return this.repository.findOneBy({
       id,
     });
   }
 
-  create(dto: CreateUserDto) {
+  createUser(dto: CreateUserDto) {
     return this.repository.save(dto);
   }
 }

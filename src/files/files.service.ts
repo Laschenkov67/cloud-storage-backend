@@ -26,7 +26,7 @@ export class FilesService {
     return qb.getMany();
   }
 
-  create(file: Express.Multer.File, userId: number) {
+  createFile(file: Express.Multer.File, userId: number) {
     return this.repository.save({
       filename: file.filename,
       originalName: file.originalname,
@@ -36,7 +36,7 @@ export class FilesService {
     });
   }
 
-  async remove(userId: number, ids: string) {
+  async removeFile(userId: number, ids: string) {
     const idsArray = ids.split(',');
 
     const qb = this.repository.createQueryBuilder('file');

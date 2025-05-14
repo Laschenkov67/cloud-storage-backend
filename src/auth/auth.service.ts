@@ -12,7 +12,7 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.usersService.findByEmail(email);
+    const user = await this.usersService.findUserByEmail(email);
 
     if (user && user.password === password) {
       const { password, ...result } = user;
@@ -22,9 +22,9 @@ export class AuthService {
     return null;
   }
 
-  async register(dto: CreateUserDto) {
+  async signUp(dto: CreateUserDto) {
     try {
-      const userData = await this.usersService.create(dto);
+      const userData = await this.usersService.createUser(dto);
 
       return {
         token: this.jwtService.sign({ id: userData.id }),
@@ -35,7 +35,7 @@ export class AuthService {
     }
   }
 
-  async login(user: UserEntity) {
+  async signIn(user: UserEntity) {
     return {
       token: this.jwtService.sign({ id: user.id }),
     };
